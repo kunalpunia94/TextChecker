@@ -29,21 +29,24 @@ if st.button("Compare Answers"):
         # Step 2: LLM Prompt
         prompt = f"""
         Compare the student's answer with the correct answer semantically.
-
+        
         Correct Answer:
         {correct_answer}
-
+        
         Student Answer:
         {student_answer}
-
+        
         Cosine Similarity Score: {cosine_sim:.2f}
-
+        
         Instructions:
-        - Always reply in one short line only.
-        - Format: "<Classification> – <very short explanation>"
-        - Classification must be one of: "Similar", "Different", or "Partially Similar".
-        - Explanation must be concise (max 1 short sentence).
+        - Always respond in this format:
+          Classification: <Similar / Different / Partially Similar>
+          Reason: <very short explanation>
+          Sources:
+            - Correct Answer: <show correct answer>
+            - Student Answer: <show student answer>
         """
+
 
 
         # Step 3: Call Groq LLM
@@ -60,3 +63,4 @@ if st.button("Compare Answers"):
 
         st.subheader("Similarity Score:")
         st.metric(label="Cosine Similarity", value=f"{cosine_sim:.2f}")
+
