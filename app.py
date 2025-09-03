@@ -39,13 +39,19 @@ if st.button("Compare Answers"):
         Cosine Similarity Score: {cosine_sim:.2f}
         
         Instructions:
-        - Always respond in this format:
-          Classification: <Similar / Different / Partially Similar>
-          Reason: <very short explanation>
+        - Always respond in this structured format:
+          Classification: <Similar / Partially Similar / Different>
+          Reason: <short explanation of why they are classified this way>
           Sources:
             - Correct Answer: <show correct answer>
             - Student Answer: <show student answer>
+          Expected Student Correction:
+            - If classification is "Similar", respond: "Not needed – already correct."
+            - If classification is "Partially Similar" or "Different", do NOT repeat the full correct answer. 
+              Instead, provide only the missing or incorrect part that should be added/changed in the student's answer.
+            - If unsure because the board’s response does not match column F or cannot be verified with methodology, respond: "Uncertain – cannot verify against methodology."
         """
+
 
 
 
@@ -63,4 +69,5 @@ if st.button("Compare Answers"):
 
         st.subheader("Similarity Score:")
         st.metric(label="Cosine Similarity", value=f"{cosine_sim:.2f}")
+
 
